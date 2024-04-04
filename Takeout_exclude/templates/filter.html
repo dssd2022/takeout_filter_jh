@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>View and Edit JSON</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<h2>Edit JSON File</h2>
+<div class="container">
+    <form action="{{ url_for('delete') }}" method="POST">
+        <button type="submit" class="btn btn-danger">Delete Selected Rows</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Delete</th>
+                    {% for col in data.columns %}
+                    <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, value in data.iterrows() %}
+                <tr>
+                    <td><input type="checkbox" name="row_id" value="{{ key }}"></td>
+                    {% for item in value %}
+                    <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>
